@@ -1,0 +1,42 @@
+Initialize engine version: 5.5.1f1 (88d00a7498cd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: AMD Radeon R9 M200X Series (ID=0x6821)
+    Vendor:   ATI
+    VRAM:     2027 MB
+    Driver:   20.19.15.5063
+Begin MonoManager ReloadAssembly
+Platform assembly: F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+- Completed reload, in  0.944 seconds
+Platform assembly: F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: F:\Users\Alex\Documents\Gravity Lens\graviitylens_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.120200 ms
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.666800 ms
+
+Unloading 208 unused Assets to reduce memory usage. Loaded Objects now: 481.
+Total: 0.471000 ms (FindLiveObjects: 0.040500 ms CreateObjectMapping: 0.022700 ms MarkObjects: 0.282200 ms  DeleteObjects: 0.124500 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.728900 ms
+
+Unloading 207 unused Assets to reduce memory usage. Loaded Objects now: 481.
+Total: 0.616400 ms (FindLiveObjects: 0.048800 ms CreateObjectMapping: 0.030300 ms MarkObjects: 0.349700 ms  DeleteObjects: 0.186100 ms)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 3194 -> priority: 1 
+  Thread -> id: 31ec -> priority: 1 
