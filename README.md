@@ -24,3 +24,7 @@ There are shaders that simulate "gravitational lens" and "gravitational redshift
 ### How to play
 
 To run the game, open the file "Gravity.apk" on Android or "gravitylens.exe" on Windows.
+
+## License
+
+[MIT](LICENSE) © Space4444
