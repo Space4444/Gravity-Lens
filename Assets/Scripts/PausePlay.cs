@@ -13,7 +13,7 @@ public class PausePlay : MonoBehaviour {
 
     public void Start()
     {
-        BH = FindObjectOfType<BHScript>();
+        BH = FindAnyObjectByType<BHScript>();
         source = Camera.main.GetComponent<AudioSource>();
         if(PlayerPrefs.HasKey("Music"))
             slider.SetActive(toggle.isOn = source.enabled = (PlayerPrefs.GetString("Music") == "t"));

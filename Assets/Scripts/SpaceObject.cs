@@ -27,14 +27,15 @@ public class SpaceObject : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        BH = FindObjectOfType<BHScript>();
+        truePosition = new Double2( UnityEngine.Random.Range(0f, 10f), UnityEngine.Random.Range(0f, 10f) );
+        BH = FindAnyObjectByType<BHScript>();
         need = true;
-        minimap = FindObjectOfType<Minimap>();
+        minimap = FindAnyObjectByType<Minimap>();
         rend = GetComponent<SpriteRenderer>();
         destroy = false;
         maxDist = Game.maxDist;
         halfDist = Game.halfDist;
-        lens = FindObjectOfType<Lens>();
+        lens = FindAnyObjectByType<Lens>();
     }
 
     private void FixedUpdate()
@@ -49,11 +50,12 @@ public class SpaceObject : MonoBehaviour
         if (speed.sqrMagnitude > 0.0009f*Game.sqrScale)
         {
             speed = speed.normalized * 0.03f*Game.scale;
-            if (Mathf.Abs(transform.position.x) < 0.01f && Mathf.Abs(transform.position.y) < 0.01f)
-            {
-                BH.mass += mass;
-                mass = 0f;
-            }
+            // if (Mathf.Abs(transform.position.x) < 0.01f && Mathf.Abs(transform.position.y) < 0.01f)
+            // {
+            //     UnityEngine.Debug.Log(mass);
+            //     BH.mass += mass;
+            //     mass = 0f;
+            // }
         }
         switch (type)
         {

@@ -118,7 +118,17 @@ public class StarGenerator : MonoBehaviour
             obj.angleSpeed = rand.Next(-200, 200)*0.01f;
             //obj.need = false;
             obj.type = SpaceObjectType.star;
-            (new Thread(Generate)).Start();
+
+            #if UNITY_WEBGL
+
+                Generate();
+
+            #else
+
+                (new Thread(Generate)).Start();
+                
+            #endif
+            
             generating = true;
         }
         if (generated)

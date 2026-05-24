@@ -17,9 +17,25 @@ public class Joystick : MonoBehaviour
 
     private void Start()
     {
+        #if UNITY_WEBGL
+
+            if (!Application.isMobilePlatform)
+                gameObject.SetActive(false);
+
+        #elif !UNITY_ANDROID
+
+            gameObject.SetActive(false);
+
+        #endif
+
+        RectTransform transform = GetComponent<RectTransform>();
+
+        float scaleRatio = Screen.height / 600f;
+        transform.anchoredPosition *= scaleRatio;
+        transform.localScale *= scaleRatio;
+        
         k = Camera.main.orthographicSize / Screen.height * 2f;
-        halfScreenSize = new Vector2(Screen.width, Screen.height)*0.5f;
-        width = GetComponent<RectTransform>().rect.width * 0.5f;
+        width = transform.rect.width * 0.5f;
         EventTrigger.Entry down = new EventTrigger.Entry(), drag = new EventTrigger.Entry(), up = new EventTrigger.Entry();
         down.eventID = EventTriggerType.PointerDown;
         down.callback.AddListener(OnPointerDown);
@@ -54,6 +70,8 @@ public class Joystick : MonoBehaviour
     {
         if (holding)
         {
+            k = Camera.main.orthographicSize / Screen.height * 2f;
+            halfScreenSize = new Vector2(Screen.width, Screen.height)*0.5f;
             Vector2 d = tapPos - halfScreenSize - (Vector2)transform.position/k;
             float c = d.magnitude;
             value = c > width ? 1f : c / width;

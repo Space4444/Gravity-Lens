@@ -14,10 +14,10 @@ public class AnotherBH : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        BH = FindObjectOfType<BHScript>();
+        BH = FindAnyObjectByType<BHScript>();
         truePosition = new Double2(Random.Range(-20f, -10f), Random.Range(-20f, -10f));
         mass = Random.Range(40f, 1000f);
-        lens = FindObjectOfType<Lens>();
+        lens = FindAnyObjectByType<Lens>();
     }
     private void FixedUpdate()
     {

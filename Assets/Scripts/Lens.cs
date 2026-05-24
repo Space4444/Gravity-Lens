@@ -20,18 +20,20 @@ public class Lens : MonoBehaviour
     private Camera cam;
 
     private Material material;// _material; //Материал на котором будет находится шейдер
+    private Canvas canvas;
 
     private void Awake()
     {
-        RectTransform rect = FindObjectOfType<RawImage>().GetComponent<RectTransform>();
+        RectTransform rect = FindAnyObjectByType<RawImage>().GetComponent<RectTransform>();
         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Screen.width * 2f);
         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Screen.height * 2f);
         truePosition = BH.truePosition;
         material = background.GetComponent<SpriteRenderer>().material;
         cam = Camera.main;
         ratio = (float)Screen.height / Screen.width;
-        material.SetFloat("_Ratio", ratio);
         material.SetFloat("_Rad", radius);
+        material.SetFloat("_Ratio", ratio);
+        canvas = FindAnyObjectByType<Canvas>();
     }
 
     private void FixedUpdate()
@@ -54,11 +56,11 @@ public class Lens : MonoBehaviour
 
         //Устанавливаем все необходимые для шейдера параметры
         material.SetVector("_Position", pos);
-        material.SetFloat("_Distance", Vector3.Distance(BH.transform.position, transform.position));
+        material.SetFloat("_Distance", Vector3.Distance(BH.transform.position, transform.position) );
         material.SetVector("pos", truePosition % new Vector2(2048f, 2048f)); // "-"
         material.SetFloat("_Rad", radius * radius / Game.sqrScale);
         material.SetVector("_Position1", pos1);
-        material.SetFloat("_Distance1", Vector3.Distance(BH1.transform.position, transform.position));
+        material.SetFloat("_Distance1", Vector3.Distance(BH1.transform.position, transform.position) );
         material.SetFloat("_Rad1", radius1 * radius1 / Game.sqrScale);
     }
 }

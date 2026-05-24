@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Diagnostics;
 
 class Game : MonoBehaviour
 {
@@ -18,7 +19,7 @@ class Game : MonoBehaviour
 
     private int countPlanets = 0, countAsteroids = 0, countStars = 0, activeStars = 0, length, activePlanets = 0, activeAsteroids = 0;
 
-    private float G = 0.000001f, trueScale = 1f, m1 = 1000, m2 = 10000;
+    private float G = 0.000001f, trueScale = 1f;
 
     private BHScript BH;
 
@@ -31,12 +32,13 @@ class Game : MonoBehaviour
     private GameStage stage = GameStage.stage1, pstage = GameStage.stage1;
 
     private Minimap minimap;
-
+    private Canvas canvas;
+    private Vector2 lastResolution;
     private void Awake()
     {
         if (PlayerPrefs.HasKey("seed"))
             seed = PlayerPrefs.GetInt("seed");
-        BH = FindObjectOfType<BHScript>();
+        BH = FindAnyObjectByType<BHScript>();
         if (PlayerPrefs.HasKey("x") && PlayerPrefs.HasKey("y") && PlayerPrefs.HasKey("mass"))
         {
             Double2 pos = new Double2(Convert.ToDouble(PlayerPrefs.GetString("x")), Convert.ToDouble(PlayerPrefs.GetString("y")));
@@ -55,13 +57,15 @@ class Game : MonoBehaviour
         scale = BH.radius * 1.5f;
         maxDist = 100f * scale;
         halfDist = maxDist * 0.5f;
+        canvas = FindAnyObjectByType<Canvas>();
     }
 
     private void Start()
     {
-        minimap = FindObjectOfType<Minimap>();
-        BH1 = FindObjectOfType<AnotherBH>();
-        lens = FindObjectOfType<Lens>();
+        lastResolution = new Vector2(Screen.width, Screen.height);
+        minimap = FindAnyObjectByType<Minimap>();
+        BH1 = FindAnyObjectByType<AnotherBH>();
+        lens = FindAnyObjectByType<Lens>();
         for (int i = 0; i < 40; i++)
         {
             asteroids.Add(Instantiate(asteroid).GetComponent<SpaceObject>());
@@ -192,7 +196,15 @@ class Game : MonoBehaviour
 
     private void Update()
     {
-        if (Time.frameCount % 30 == 0)
+        if (Screen.width != (int)lastResolution.x || Screen.height != (int)lastResolution.y) {
+            PlayerPrefs.SetFloat("mass", BH.mass);
+            PlayerPrefs.SetString("x", BH.truePosition.x.ToString());
+            PlayerPrefs.SetString("y", BH.truePosition.y.ToString());
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(0);
+        }
+
+        if (Time.frameCount % 1000 == 0)
             GC.Collect();
 
         pstage = stage;

@@ -7,8 +7,8 @@ public class Loading : MonoBehaviour {
     private BackgroundGenerator backGen;
 	// Use this for initialization
 	void Start () {
-        game = FindObjectOfType<Game>();
-        backGen = FindObjectOfType<BackgroundGenerator>();
+        game = FindAnyObjectByType<Game>();
+        backGen = FindAnyObjectByType<BackgroundGenerator>();
     }
 	
 	// Update is called once per frame

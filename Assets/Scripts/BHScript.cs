@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class BHScript : MonoBehaviour {
     
@@ -26,11 +27,10 @@ public class BHScript : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-        wh = new Vector2(Screen.width, Screen.height) * 0.5f;
         //PC = Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer;
         radius = Mathf.Pow(mass * 0.000005f, 0.333333333f);
-        lens = FindObjectOfType<Lens>();
-        rend = FindObjectOfType<BackgroundGenerator>().GetComponent<SpriteRenderer>();
+        lens = FindAnyObjectByType<Lens>();
+        rend = FindAnyObjectByType<BackgroundGenerator>().GetComponent<SpriteRenderer>();
 	}
     private void FixedUpdate()
     {
@@ -50,8 +50,39 @@ public class BHScript : MonoBehaviour {
 
     }
     // Update is called once per frame
+    void CheckPCInput()
+    {
+        if (Mouse.current.leftButton.isPressed)
+        {
+            wh = new Vector2(Screen.width, Screen.height) * 0.5f;
+            Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+            Vector2 d = Mouse.current.position.ReadValue() - wh;
+            OnJoystickDrag(Mathf.Atan2(d.y, d.x), Mathf.Min(1f, 2f * d.magnitude / wh.y) );
+            return;
+        }
+
+        float up = Keyboard.current.wKey.ReadValue();
+        float left = Keyboard.current.aKey.ReadValue();
+        float down = Keyboard.current.sKey.ReadValue();
+        float right = Keyboard.current.dKey.ReadValue();
+        if (up != 0 || left != 0 || down != 0 || right != 0)
+        {
+            OnJoystickDrag(Mathf.Atan2(up - down, right - left), 1f);
+        }
+    }
     void Update ()
     {
+        #if UNITY_WEBGL
+
+            if (!Application.isMobilePlatform)
+                CheckPCInput();
+
+        #elif !UNITY_ANDROID
+
+            CheckPCInput();
+
+        #endif
+
         if (mass == 0f != text.activeSelf)
         {
             text.GetComponent<Text>().text = "You fell into bigger black hole.\nYour mass: " + maxMass.ToString("0");
@@ -66,7 +97,7 @@ public class BHScript : MonoBehaviour {
             {
                 mass = 40;
                 truePosition = new Double2();
-                FindObjectOfType<Game>().Restart();
+                FindAnyObjectByType<Game>().Restart();
             }
         }
         else

@@ -1,3 +1,8 @@
 Library
 .vs
 WorldAndroid.apk
+node_modules
+Logs
+UserSettings
+Temp
+*.keystore

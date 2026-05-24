@@ -14,6 +14,7 @@ public class Spagetti : MonoBehaviour
     private Material _material; //Материал на котором будет находится шейдер
 
     private Camera cam, cam1;
+    private Canvas canvas;
 
     private void Awake()
     {
@@ -22,9 +23,10 @@ public class Spagetti : MonoBehaviour
         cam1 = GetComponent<Camera>();
         RenderTexture rendt = new RenderTexture(Screen.width, Screen.height, 0);// (int)(cam.orthographicSize/ratio*200f), (int)(cam.orthographicSize*200f), 0);
         GetComponent<Camera>().targetTexture = rendt;
-        FindObjectOfType<RawImage>().texture = rendt;
-        lens = FindObjectOfType<Lens>();
+        FindAnyObjectByType<RawImage>().texture = rendt;
+        lens = FindAnyObjectByType<Lens>();
         material.SetFloat("_Ratio", ratio);
+        canvas = FindAnyObjectByType<Canvas>();
     }
 
     protected Material material
@@ -66,9 +68,9 @@ public class Spagetti : MonoBehaviour
             //Устанавливаем все необходимые для шейдера параметры
             material.SetVector("_Position", pos);
             material.SetFloat("_Rad", radius * radius / Game.sqrScale);
-            material.SetFloat("_Distance", Vector3.Distance(BH.transform.position, transform.position));
+            material.SetFloat("_Distance", Vector3.Distance(BH.transform.position, transform.position) );
             material.SetVector("_Position1", pos1);
-            material.SetFloat("_Distance1", Vector3.Distance(BH1.transform.position, transform.position));
+            material.SetFloat("_Distance1", Vector3.Distance(BH1.transform.position, transform.position) );
             material.SetFloat("_Rad1", radius1 * radius1 / Game.sqrScale);
             //И применяем к полученному изображению.
             Graphics.Blit(source, destination, material);

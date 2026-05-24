@@ -99,7 +99,17 @@ public class PlanetGenerator : MonoBehaviour
             obj.angleSpeed = rand.Next(-100, 100)*0.01f;
             //obj.need = false;
             obj.type = SpaceObjectType.planet;
-            (new Thread(Generate)).Start();
+
+            #if UNITY_WEBGL
+
+                Generate();
+
+            #else
+
+                (new Thread(Generate)).Start();
+                
+            #endif
+            
             generating = true;
         }
         if (generated)

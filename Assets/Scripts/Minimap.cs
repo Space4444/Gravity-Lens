@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Minimap : MonoBehaviour
@@ -10,6 +11,7 @@ public class Minimap : MonoBehaviour
 
     private float r = 10f, r1 = 11f, r2 = 12f, r3 = 13f, R = 150f;
 
+    private Canvas canvas;
     static Material Material;
     static void CreateLineMaterial()
     {
@@ -32,9 +34,9 @@ public class Minimap : MonoBehaviour
 
     private void Start()
     {
-        R = Mathf.Min(Screen.width, Screen.height) * 0.5f - 10f;
-        BH = FindObjectOfType<BHScript>();
-        BH1 = FindObjectOfType<AnotherBH>();
+        canvas = ((RectTransform)transform).GetComponentInParent<Canvas>();
+        BH = FindAnyObjectByType<BHScript>();
+        BH1 = FindAnyObjectByType<AnotherBH>();
         CreateLineMaterial();
         // Apply the line material
     }
@@ -42,6 +44,7 @@ public class Minimap : MonoBehaviour
     // Will be called after all regular rendering is done
     public void OnRenderObject()
     {
+        R = Mathf.Min(Screen.width, Screen.height) / canvas.scaleFactor * 0.5f - 20f;
         Material.SetPass(0);
 
         GL.PushMatrix();

@@ -113,7 +113,17 @@ public class AsteroidGenerator : MonoBehaviour
             obj.angleSpeed = rand.Next(-5, 5);
             //obj.need = true;
             obj.type = SpaceObjectType.asteroid;
-            (new Thread(Generate)).Start();
+
+            #if UNITY_WEBGL
+
+                Generate();
+
+            #else
+
+                (new Thread(Generate)).Start();
+                
+            #endif
+            
             generating = true;
         }
         if (generated)

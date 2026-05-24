@@ -42,8 +42,15 @@ public class BackgroundGenerator : MonoBehaviour
                     generated = true;
                 else
                 {
-                    Thread th = new Thread(Generate);
-                    th.Start();
+                    #if UNITY_WEBGL
+
+                        Generate();
+
+                    #else
+
+                        (new Thread(Generate)).Start();
+                        
+                    #endif
                 }
             }
             if (generated)
