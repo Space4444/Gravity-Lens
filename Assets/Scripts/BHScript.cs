@@ -89,6 +89,7 @@ public class BHScript : MonoBehaviour {
             text.SetActive(mass == 0f);
         }
         radius = Mathf.Pow(mass * 0.000005f, 0.333333333f);
+
         if (!double.IsNaN(truePosition.x) && !double.IsNaN(truePosition.y))
             transform.position = (truePosition - lens.truePosition)/Game.scale*2f;
         if (mass == 0)

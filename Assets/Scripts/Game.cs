@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Diagnostics;
 
 class Game : MonoBehaviour
 {
@@ -41,7 +40,7 @@ class Game : MonoBehaviour
         BH = FindAnyObjectByType<BHScript>();
         if (PlayerPrefs.HasKey("x") && PlayerPrefs.HasKey("y") && PlayerPrefs.HasKey("mass"))
         {
-            Double2 pos = new Double2(Convert.ToDouble(PlayerPrefs.GetString("x")), Convert.ToDouble(PlayerPrefs.GetString("y")));
+            Double2 pos = new Double2( PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y") );
             float m = PlayerPrefs.GetFloat("mass");
             if (m>0 && !double.IsNaN(pos.x) && !double.IsNaN(pos.y) && !double.IsInfinity(pos.x) && !double.IsInfinity(pos.y))
             {
@@ -198,8 +197,8 @@ class Game : MonoBehaviour
     {
         if (Screen.width != (int)lastResolution.x || Screen.height != (int)lastResolution.y) {
             PlayerPrefs.SetFloat("mass", BH.mass);
-            PlayerPrefs.SetString("x", BH.truePosition.x.ToString());
-            PlayerPrefs.SetString("y", BH.truePosition.y.ToString());
+            PlayerPrefs.SetFloat("x", (float)BH.truePosition.x);
+            PlayerPrefs.SetFloat("y", (float)BH.truePosition.y);
             PlayerPrefs.Save();
             SceneManager.LoadScene(0);
         }

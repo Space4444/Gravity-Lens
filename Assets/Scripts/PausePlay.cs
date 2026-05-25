@@ -31,8 +31,8 @@ public class PausePlay : MonoBehaviour {
         if (paused)
         {
             PlayerPrefs.SetFloat("mass", BH.mass);
-            PlayerPrefs.SetString("x", BH.truePosition.x.ToString());
-            PlayerPrefs.SetString("y", BH.truePosition.y.ToString());
+            PlayerPrefs.SetFloat("x", (float)BH.truePosition.x);
+            PlayerPrefs.SetFloat("y", (float)BH.truePosition.y);
             PlayerPrefs.Save();
         }
     }
