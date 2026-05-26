@@ -23,7 +23,7 @@ This is 2D space game made with C# and Unity. Versions for Android, Web and Wind
 You control a black hole and "eat" surrounding asteroids, planets, stars and other black holes. But stay away from bigger black holes!
 
 All game objects and background are generated procedurally.
-There are shaders that simulate "gravitational lens" and "gravitational redshift" effects.
+There are shaders that simulate "spaghettification", "gravitational lens" and "gravitational redshift" effects.
 
 You can play on web at the links above or download and install "Gravity.apk" on Android or download "Win64Build" and open "Gravity Lens.exe" on Windows.
 
